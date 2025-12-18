@@ -128,7 +128,7 @@ const blogPosts = [
     title: "Migrating from 1-1 to 1-N: Scaling a Multi-User Studio Architecture",
     source: "BooksOpen",
     linkText: "Blog",
-    url: "https://blog.booksopen.io/posts/downsizing-your-piercing",
+    url: "https://blog.booksopen.io/posts/studio-migration",
   },
   {
     title: "Building an AI-Powered Migration Tool for E-commerce Platforms",
