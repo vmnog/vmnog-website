@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, type ReactNode } from "react";
 import { AnimatePresence, useScroll, useTransform } from "motion/react";
 import * as motion from "motion/react-client";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Github01Icon, NewTwitterIcon, StarIcon } from "@hugeicons/core-free-icons";
+import { ArrowDown01Icon, Github01Icon, NewTwitterIcon, StarIcon } from "@hugeicons/core-free-icons";
 
 const container = {
   hidden: { opacity: 0 },
@@ -143,7 +143,7 @@ const openSourceProjects = [
     name: "plotwist",
     description: "Open-source platform for tracking movies, TV shows, and building watchlists.",
     tech: "Next.js, TypeScript, Tailwind",
-    stars: 1200,
+    repo: "plotwist-app/plotwist",
     url: "https://github.com/plotwist-app/plotwist",
     contributor: true,
   },
@@ -151,14 +151,14 @@ const openSourceProjects = [
     name: "nextjs-stripe-store",
     description: "Full-featured ecommerce starter with Stripe payments, cart management, and product catalog.",
     tech: "Next.js, Stripe, TypeScript",
-    stars: 85,
+    repo: "vmnog/nextjs-stripe-store",
     url: "https://github.com/vmnog/nextjs-stripe-store",
   },
   {
     name: "saas-ai-boilerplate",
     description: "Production-ready SaaS starter with AI chat, Stripe subscriptions, and authentication.",
     tech: "Next.js, Fastify, OpenAI, Stripe",
-    stars: 42,
+    repo: "vmnog/saas-ai-boilerplate",
     url: "https://github.com/vmnog/saas-ai-boilerplate",
   },
 ];
@@ -179,6 +179,7 @@ const INITIAL_DISPLAY_COUNT = 4;
 export default function Home() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
+  const [repoStars, setRepoStars] = useState<Record<string, number | null>>({});
   const experienceListRef = useRef<HTMLOListElement>(null);
   const aboutImageRef = useRef<HTMLDivElement>(null);
 
@@ -200,6 +201,32 @@ export default function Home() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    async function fetchGitHubStars() {
+      const stars: Record<string, number | null> = {};
+
+      await Promise.all(
+        openSourceProjects.map(async (project) => {
+          try {
+            const response = await fetch(`https://api.github.com/repos/${project.repo}`);
+            if (response.ok) {
+              const data = await response.json();
+              stars[project.repo] = data.stargazers_count;
+            } else {
+              stars[project.repo] = null;
+            }
+          } catch {
+            stars[project.repo] = null;
+          }
+        })
+      );
+
+      setRepoStars(stars);
+    }
+
+    fetchGitHubStars();
+  }, []);
+
   const displayedExperience = isExpanded
     ? workExperience
     : workExperience.slice(0, INITIAL_DISPLAY_COUNT);
@@ -215,7 +242,7 @@ export default function Home() {
         animate="show"
       >
         <BlurFadeIn>
-          <h1 className="text-3xl font-normal leading-tight tracking-tight text-balance sm:text-4xl">
+          <h1 className="text-3xl font-normal leading-tight tracking-tight sm:text-4xl">
             Transforming startup visions into reality{" "}
             <span className="text-zinc-400 dark:text-zinc-500">
               and expertly leading end-to-end product development.
@@ -246,7 +273,7 @@ export default function Home() {
               </a>
               <a
                 href="mailto:me@vmnog.com"
-                className="text-sm decoration-zinc-900 underline-offset-4 hover:underline dark:decoration-zinc-100"
+                className="text-sm decoration-zinc-600 underline-offset-4 transition-colors hover:underline hover:text-zinc-900 hover:decoration-zinc-900 dark:decoration-zinc-400 dark:hover:text-zinc-100 dark:hover:decoration-zinc-100"
               >
                 me@vmnog.com
               </a>
@@ -259,7 +286,7 @@ export default function Home() {
             <h2 className="text-xs font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
               Experiences
             </h2>
-            <ol ref={experienceListRef} className="mt-8 space-y-6 overflow-hidden">
+            <ol ref={experienceListRef} className="mt-8 overflow-hidden">
               <AnimatePresence>
                 {displayedExperience.map((job, index) => {
                   const jobKey = `${job.company}-${job.startYear}`;
@@ -267,10 +294,20 @@ export default function Home() {
                   return (
                     <motion.li
                       key={jobKey}
-                      className="group flex cursor-default flex-col gap-2"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0, transition: { duration: 0.3, delay: index * 0.1 } }}
-                      exit={{ opacity: 0, x: 20, transition: { duration: 0.3, delay: (workExperience.length - 1 - index) * 0.1 } }}
+                      className="group flex cursor-pointer flex-col gap-2"
+                      initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                      animate={{
+                        opacity: 1,
+                        height: "auto",
+                        marginBottom: 24,
+                        transition: { duration: 0.3, delay: index > INITIAL_DISPLAY_COUNT - 1 ? (index - INITIAL_DISPLAY_COUNT) * 0.1 : 0 }
+                      }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                        marginBottom: 0,
+                        transition: { duration: 0.3, delay: (workExperience.length - 1 - index) * 0.05 }
+                      }}
                       onClick={() => setExpandedJob(isJobExpanded ? null : jobKey)}
                     >
                       <div className="flex items-start gap-4">
@@ -289,14 +326,21 @@ export default function Home() {
                             <span className="font-medium">{job.role}</span> · {job.tech}
                           </span>
                         </div>
-                        <span
-                          className="text-xs text-zinc-400 dark:text-zinc-500"
-                          aria-label={`${job.startYear} until ${job.endYear}`}
-                        >
-                          {job.startYear} - {job.endYear}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className="text-xs text-zinc-400 dark:text-zinc-500"
+                            aria-label={`${job.startYear} until ${job.endYear}`}
+                          >
+                            {job.startYear} - {job.endYear}
+                          </span>
+                          <HugeiconsIcon
+                            icon={ArrowDown01Icon}
+                            size={14}
+                            className={`text-zinc-400 transition-transform duration-200 group-hover:rotate-180 dark:text-zinc-500 ${isJobExpanded ? "rotate-180" : ""}`}
+                          />
+                        </div>
                       </div>
-                      <div className={`grid transition-all duration-200 ease-out ${isJobExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"} sm:group-hover:grid-rows-[1fr] sm:group-hover:opacity-100`}>
+                      <div className={`grid transition-all duration-200 ease-out ${isJobExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                         <div className="overflow-hidden">
                           <p className="max-w-sm pl-14 text-xs text-zinc-500 dark:text-zinc-400">
                             <span className="mr-1 text-zinc-300 dark:text-zinc-600">↳</span>
@@ -371,10 +415,12 @@ export default function Home() {
                     >
                       {project.name}
                     </a>
-                    <span className="flex items-center gap-1 text-xs text-amber-500">
-                      <HugeiconsIcon icon={StarIcon} size={12} />
-                      {project.stars}
-                    </span>
+                    {repoStars[project.repo] != null && (
+                      <span className="flex items-center gap-1 text-xs text-amber-500">
+                        <HugeiconsIcon icon={StarIcon} size={12} />
+                        {repoStars[project.repo]}
+                      </span>
+                    )}
                     <a
                       href={project.url}
                       target="_blank"
@@ -446,16 +492,15 @@ export default function Home() {
         </BlurFadeIn>
 
         <BlurFadeIn>
-          <div>
-            <h2 className="text-xs font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-              About
-            </h2>
-            <div className="relative mt-8 grid grid-cols-1 gap-6 sm:-mx-16 sm:grid-cols-2 sm:px-16">
-              <div className="space-y-6 text-sm text-pretty text-zinc-600 dark:text-zinc-400">
-                <div className="space-y-4">
+          <div className="relative grid grid-cols-1 gap-6 sm:-mx-16 sm:grid-cols-2 sm:px-16">
+            <div className="space-y-6 text-sm text-pretty text-zinc-600 dark:text-zinc-400">
+              <h2 className="text-xs font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+                About
+              </h2>
+              <div className="space-y-4">
                   <p>
                     <span className="font-medium text-zinc-900 dark:text-zinc-100">Based in São Paulo, Brazil.</span>{" "}
-                    Nine years turning ideas into products that people actually use.
+                    Almost a decade turning ideas into products that people actually use.
                   </p>
                   <p>
                     I thrive in startups where speed matters and ideas turn into real things.
@@ -483,7 +528,6 @@ export default function Home() {
                   className="aspect-square sm:aspect-9/16 w-full object-cover object-top-right scale-125"
                   style={{ y: imageY }}
                 />
-              </div>
             </div>
           </div>
         </BlurFadeIn>
@@ -513,7 +557,7 @@ export default function Home() {
           </a>
           <a
             href="mailto:me@vmnog.com"
-            className="text-sm decoration-zinc-600 underline-offset-4 hover:underline dark:decoration-zinc-400"
+            className="text-sm decoration-zinc-600 underline-offset-4 transition-colors hover:underline hover:text-zinc-900 hover:decoration-zinc-900 dark:decoration-zinc-400 dark:hover:text-zinc-100 dark:hover:decoration-zinc-100"
           >
             me@vmnog.com
           </a>
