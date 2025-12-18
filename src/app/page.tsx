@@ -187,7 +187,7 @@ export default function Home() {
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -446,53 +446,43 @@ export default function Home() {
         </BlurFadeIn>
 
         <BlurFadeIn>
-          <div className="relative grid grid-cols-1 gap-4 sm:-mx-16 sm:grid-cols-2 sm:px-16">
-            <div ref={aboutImageRef} className="overflow-hidden rounded-2xl">
-              <motion.img
-                src="/assets/about.jpeg"
-                alt="Victor Nogueira"
-                className="aspect-square sm:aspect-9/16 w-full object-cover object-top-right scale-125"
-                style={{ y: imageY }}
-              />
-            </div>
-            <div>
-              <div className="space-y-4 text-sm text-pretty text-zinc-600 dark:text-zinc-400">
-                <p>
-                  <span className="font-medium text-zinc-900 dark:text-zinc-100">I turn ideas into products.</span>{" "}
-                  Full-stack developer with nine years of experience building digital products from scratch. I love working in fast-paced startup environments and sharing what I learn through open source and content creation.
-                </p>
-                <ul className="space-y-3">
-                  <li>
-                    <span className="mr-2 text-zinc-300 dark:text-zinc-600">—</span>
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">I&apos;m obsessed with the problem.</span>{" "}
-                    I love diving deep into complex challenges, understanding the root cause, and building solutions that truly work for users.
-                  </li>
-                  <li>
-                    <span className="mr-2 text-zinc-300 dark:text-zinc-600">—</span>
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">I build for real users.</span>{" "}
-                    Everything I create is meant to solve actual problems. I focus on what matters and ship value fast.
-                  </li>
-                  <li>
-                    <span className="mr-2 text-zinc-300 dark:text-zinc-600">—</span>
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">I&apos;m a self-starter.</span>{" "}
-                    I thrive in startup environments where I can take ownership, move quickly, and build products from scratch.
-                  </li>
-                  <li>
-                    <span className="mr-2 text-zinc-300 dark:text-zinc-600">—</span>
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">I enjoy sharing knowledge.</span>{" "}
-                    Through my YouTube channel and courses, I help other developers grow and learn from my experience.
-                  </li>
-                  <li>
-                    <span className="mr-2 text-zinc-300 dark:text-zinc-600">—</span>
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">I&apos;m always learning.</span>{" "}
-                    Curiosity drives me to explore new technologies, contribute to open source, and keep improving my craft.
-                  </li>
-                  <li>
-                    <span className="mr-2 text-zinc-300 dark:text-zinc-600">—</span>
-                    <span className="font-medium text-zinc-900 dark:text-zinc-100">I&apos;m adaptable.</span>{" "}
-                    I can wear many hats when needed. When challenges arise, I find a way to get the job done.
-                  </li>
-                </ul>
+          <div>
+            <h2 className="text-xs font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+              About
+            </h2>
+            <div className="relative mt-8 grid grid-cols-1 gap-6 sm:-mx-16 sm:grid-cols-2 sm:px-16">
+              <div className="space-y-6 text-sm text-pretty text-zinc-600 dark:text-zinc-400">
+                <div className="space-y-4">
+                  <p>
+                    <span className="font-medium text-zinc-900 dark:text-zinc-100">Based in São Paulo, Brazil.</span>{" "}
+                    Nine years turning ideas into products that people actually use.
+                  </p>
+                  <p>
+                    I thrive in startups where speed matters and ideas turn into real things.
+                  </p>
+                  <p>
+                    Give me a problem, a deadline, and some creative freedom—I&apos;ll give you something you&apos;re proud to ship.
+                  </p>
+                  <p>
+                    The details matter to me. It&apos;s what separates good from great.
+                  </p>
+                </div>
+                <blockquote className="border-l-2 border-zinc-200 pl-4 dark:border-zinc-700">
+                  <p className="text-sm italic text-zinc-900 dark:text-zinc-100">
+                    &ldquo;Building is my craft. Startups are my playground.&rdquo;
+                  </p>
+                  <cite className="mt-2 block text-xs font-medium not-italic text-zinc-400 dark:text-zinc-500">
+                    — Victor Nogueira
+                  </cite>
+                </blockquote>
+              </div>
+              <div ref={aboutImageRef} className="overflow-hidden rounded-2xl">
+                <motion.img
+                  src="/assets/about.jpeg"
+                  alt="Victor Nogueira"
+                  className="aspect-square sm:aspect-9/16 w-full object-cover object-top-right scale-125"
+                  style={{ y: imageY }}
+                />
               </div>
             </div>
           </div>
