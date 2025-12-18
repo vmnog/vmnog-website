@@ -242,7 +242,7 @@ export default function Home() {
           animate="show"
         >
           <BlurFadeIn>
-            <h1 className="text-[2.1rem] font-normal leading-tight tracking-tight text-balance sm:text-[2.7rem] sm:text-pretty">
+            <h1 className="text-[1.9rem] font-normal leading-tight tracking-tight text-balance sm:text-[2.7rem] sm:text-pretty">
               Transforming startup visions into reality{" "}
               <span className="text-zinc-400 dark:text-zinc-500">
                 and expertly leading end-to-end product development.
