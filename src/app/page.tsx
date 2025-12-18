@@ -263,7 +263,7 @@ export default function Home() {
                   <HugeiconsIcon icon={Github01Icon} size={24} />
                 </a>
                 <a
-                  href="https://x.com/caraquecoda"
+                  href="https://x.com/mevmnog"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
@@ -554,7 +554,7 @@ export default function Home() {
               <HugeiconsIcon icon={Github01Icon} size={20} />
             </a>
             <a
-              href="https://x.com/caraquecoda"
+              href="https://x.com/mevmnog"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
