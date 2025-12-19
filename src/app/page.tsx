@@ -134,7 +134,7 @@ const blogPosts = [
     title: "Building an AI-Powered Migration Tool for E-commerce Platforms",
     source: "BooksOpen",
     linkText: "Blog",
-    url: "https://blog.booksopen.io/posts/downsizing-your-piercing",
+    url: "https://blog.booksopen.io/posts/building-an-ai-powered-migration-tool-for-e-commerce-platforms",
   },
 ];
 
