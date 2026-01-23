@@ -148,6 +148,13 @@ const openSourceProjects = [
     contributor: true,
   },
   {
+    name: "calendarcn",
+    description: "A beautifully crafted calendar component built with shadcn/ui and Tailwind CSS, inspired by Notion Calendar.",
+    tech: "Next.js, shadcn/ui, Tailwind CSS",
+    repo: "vmnog/calendarcn",
+    url: "https://github.com/vmnog/calendarcn",
+  },
+  {
     name: "nextjs-stripe-store",
     description: "Full-featured ecommerce starter with Stripe payments, cart management, and product catalog.",
     tech: "Next.js, Stripe, TypeScript",
