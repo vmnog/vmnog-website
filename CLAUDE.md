@@ -11,3 +11,7 @@ The five default triage roles, recorded as a `Status:` line in each issue file. 
 ### Domain docs
 
 Single-context: one `GLOSSARY.md` and `docs/adr/` at the repo root. See `docs/agents/domain.md`.
+
+### Coordinator loop
+
+Tickets run through the domino-agents loop. Its project config is `docs/agents/domino-agents.md`.
