@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, type ReactNode } from "react";
 import { AnimatePresence, useScroll, useTransform } from "motion/react";
 import * as motion from "motion/react-client";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowDown01Icon, Github01Icon, Mail01Icon, NewTwitterIcon, StarIcon } from "@hugeicons/core-free-icons";
+import { ArrowDown01Icon, Github01Icon, Linkedin01Icon, Mail01Icon, NewTwitterIcon, StarIcon } from "@hugeicons/core-free-icons";
 
 const container = {
   hidden: { opacity: 0 },
@@ -251,6 +251,15 @@ export default function Home() {
                   aria-label="X (Twitter)"
                 >
                   <HugeiconsIcon icon={NewTwitterIcon} size={24} />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/vmnogueira/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+                  aria-label="LinkedIn"
+                >
+                  <HugeiconsIcon icon={Linkedin01Icon} size={24} />
                 </a>
                 <a
                   href="mailto:me@vmnog.com"
@@ -539,6 +548,15 @@ export default function Home() {
               aria-label="X (Twitter)"
             >
               <HugeiconsIcon icon={NewTwitterIcon} size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/vmnogueira/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+              aria-label="LinkedIn"
+            >
+              <HugeiconsIcon icon={Linkedin01Icon} size={20} />
             </a>
             <a
               href="mailto:me@vmnog.com"
