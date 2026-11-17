@@ -32,22 +32,31 @@ function BlurFadeIn({ children }: { children: ReactNode }) {
 
 const workExperience = [
   {
-    company: "BooksOpen",
-    role: "Founding Engineer",
-    tech: "Next.js, Nest.js, Prisma",
-    description: "Migrated core architecture from 1-1 to 1-n enabling workspace environments and Stripe Connect accounts. Eliminated 100% of payment errors preventing duplicate charges and double bookings.",
-    startYear: "2025",
+    company: "Needles",
+    role: "AI Engineer",
+    tech: "Python, FastAPI, Claude",
+    description: "Founding AI engineer at Chronic Ink, building Needles: sales training where staff practice voice calls with an AI customer and get a score with coaching on what to fix. Own it end-to-end, from API design and data modeling to AI pipelines and deployment.",
+    startYear: "2026",
     endYear: "Present",
-    logo: "/assets/booksopen.jpeg",
+    logo: "/assets/needles.png",
   },
   {
     company: "CARAQUECODA",
     role: "Founder",
-    tech: "React, Node.js, YouTube",
-    description: "Founded a software house delivering end-to-end projects while leading a team of developers. Built a 1k+ subscriber YouTube community sharing the journey of dev entrepreneurship.",
+    tech: "LLMs, Python, Next.js",
+    description: "Software house behind my senior AI engineering contracts with international clients. Ship production AI systems end-to-end: LLM orchestration, RAG, agent workflows, and evaluation loops, backed by years of full-stack work in fintech, booking, and health tech.",
     startYear: "2023",
-    endYear: "2025",
+    endYear: "Present",
     logo: "/assets/caraquecoda.png",
+  },
+  {
+    company: "BooksOpen",
+    role: "Senior Software Engineer",
+    tech: "Next.js, Nest.js, Prisma",
+    description: "Migrated core architecture from 1-1 to 1-n enabling workspace environments and Stripe Connect accounts. Eliminated 100% of payment errors preventing duplicate charges and double bookings.",
+    startYear: "2025",
+    endYear: "2026",
+    logo: "/assets/booksopen.jpeg",
   },
   {
     company: "DocHelp",
@@ -123,50 +132,15 @@ const workExperience = [
   },
 ];
 
-const blogPosts = [
-  {
-    title: "Migrating from 1-1 to 1-N: Scaling a Multi-User Studio Architecture",
-    source: "BooksOpen",
-    linkText: "Blog",
-    url: "https://blog.booksopen.io/posts/studio-migration",
-  },
-  {
-    title: "Building an AI-Powered Migration Tool for E-commerce Platforms",
-    source: "BooksOpen",
-    linkText: "Blog",
-    url: "https://blog.booksopen.io/posts/building-an-ai-powered-migration-tool-for-e-commerce-platforms",
-  },
-];
+const blogPosts: { title: string; source: string; linkText: string; url: string }[] = [];
 
 const openSourceProjects = [
-  {
-    name: "plotwist",
-    description: "Open-source platform for tracking movies, TV shows, and building watchlists.",
-    tech: "Next.js, TypeScript, Tailwind",
-    repo: "plotwist-app/plotwist",
-    url: "https://github.com/plotwist-app/plotwist",
-    contributor: true,
-  },
   {
     name: "calendarcn",
     description: "A beautifully crafted calendar component built with shadcn/ui and Tailwind CSS, inspired by Notion Calendar.",
     tech: "Next.js, shadcn/ui, Tailwind CSS",
     repo: "vmnog/calendarcn",
     url: "https://github.com/vmnog/calendarcn",
-  },
-  {
-    name: "nextjs-stripe-store",
-    description: "Full-featured ecommerce starter with Stripe payments, cart management, and product catalog.",
-    tech: "Next.js, Stripe, TypeScript",
-    repo: "vmnog/nextjs-stripe-store",
-    url: "https://github.com/vmnog/nextjs-stripe-store",
-  },
-  {
-    name: "saas-ai-boilerplate",
-    description: "Production-ready SaaS starter with AI chat, Stripe subscriptions, and authentication.",
-    tech: "Next.js, Fastify, OpenAI, Stripe",
-    repo: "vmnog/saas-ai-boilerplate",
-    url: "https://github.com/vmnog/saas-ai-boilerplate",
   },
 ];
 
@@ -379,6 +353,7 @@ export default function Home() {
             </div>
           </BlurFadeIn>
 
+          {blogPosts.length > 0 && (
           <BlurFadeIn>
             <div>
               <h2 className="text-sm font-medium uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
@@ -411,6 +386,7 @@ export default function Home() {
               </ul>
             </div>
           </BlurFadeIn>
+          )}
 
           <BlurFadeIn>
             <div>
@@ -443,11 +419,6 @@ export default function Home() {
                       >
                         GitHub
                       </a>
-                      {project.contributor && (
-                        <span className="ml-auto rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-amber-700 dark:bg-amber-900/30 dark:text-amber-500">
-                          Contributor
-                        </span>
-                      )}
                     </div>
                     <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
                       {project.description}
