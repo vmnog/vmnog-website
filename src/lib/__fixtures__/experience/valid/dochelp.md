@@ -12,3 +12,7 @@ DocHelp helps clinics with their paperwork.
 I built the **first version**.
 
 ![The site preview card, used here as a stand-in image](/assets/og.jpg)
+
+See [the homepage](/#experiences), [the site](https://vmnog.com) and [the first section](#what-i-did).
+
+![Q&amp;A & a "quote"](/assets/og.jpg "Card & title")

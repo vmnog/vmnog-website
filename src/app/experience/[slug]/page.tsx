@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   experienceContentDir,
+  experiencePostMetadata,
   experienceSlug,
   getExperiencePost,
   listExperiencePostSlugs,
@@ -22,10 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getExperiencePost(slug, experienceContentDir());
   if (!post) return {};
-  return {
-    title: { absolute: `${post.title} · Victor Nogueira` },
-    description: post.summary,
-  };
+  return experiencePostMetadata(post);
 }
 
 // Minimal, unstyled page that proves the route. The layout from the experience-pages/02 boards is
