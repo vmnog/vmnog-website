@@ -196,10 +196,11 @@ export function HomePage({ storyHrefs }: Props) {
                     const jobKey = `${job.company}-${job.startYear}`;
                     const isJobExpanded = expandedJob === jobKey;
                     const storyHref = storyHrefs[job.company];
+                    const detailsId = `experience-${jobKey.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-details`;
                     return (
                       <motion.li
                         key={jobKey}
-                        className="group flex cursor-pointer flex-col gap-2"
+                        className="group flex flex-col gap-2"
                         initial={{ opacity: 0, height: 0, marginBottom: 0 }}
                         animate={{
                           opacity: 1,
@@ -213,27 +214,28 @@ export function HomePage({ storyHrefs }: Props) {
                           marginBottom: 0,
                           transition: { duration: 0.3, delay: (workExperience.length - 1 - index) * 0.05 }
                         }}
-                        onClick={() => setExpandedJob(isJobExpanded ? null : jobKey)}
-                        // Tabbing onto a collapsed row's story link opens the row, so the link is never focused unseen.
-                        onFocus={() => setExpandedJob(jobKey)}
                       >
-                        <div className="flex flex-col">
-                          <div className="flex items-center gap-4">
-                            <div className="relative flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-zinc-700/50">
+                        {/* The header is the row's one control; the story link sits outside it, in the details. */}
+                        <button
+                          type="button"
+                          aria-expanded={isJobExpanded}
+                          aria-controls={detailsId}
+                          onClick={() => setExpandedJob(isJobExpanded ? null : jobKey)}
+                          className="flex w-full cursor-pointer flex-col rounded-lg text-left focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-500"
+                        >
+                          <span className="flex w-full items-center gap-4">
+                            <span className="relative flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-zinc-700/50">
                               <img
                                 src={job.logo}
                                 alt={`${job.company} logo`}
                                 className="h-7 w-7 rounded-full object-cover"
                               />
-                            </div>
+                            </span>
                             <span className="flex-1 text-base font-medium leading-relaxed text-zinc-900 dark:text-zinc-100">
                               {job.company}
                             </span>
-                            <div className="flex items-center gap-2">
-                              <span
-                                className="text-sm text-zinc-400 dark:text-zinc-500"
-                                aria-label={`${job.startYear} until ${job.endYear}`}
-                              >
+                            <span className="flex items-center gap-2">
+                              <span className="text-sm text-zinc-400 dark:text-zinc-500">
                                 {job.startYear} - {job.endYear}
                               </span>
                               <HugeiconsIcon
@@ -241,24 +243,25 @@ export function HomePage({ storyHrefs }: Props) {
                                 size={14}
                                 className={`text-zinc-400 transition-transform duration-200 group-hover:rotate-180 dark:text-zinc-500 ${isJobExpanded ? "rotate-180" : ""}`}
                               />
-                            </div>
-                          </div>
+                            </span>
+                          </span>
                           <span className="pl-14 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
                             <span className="font-medium">{job.role}</span> · {job.tech}
                           </span>
-                        </div>
+                        </button>
                         <div className={`grid transition-all duration-200 ease-out ${isJobExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                          <div className="overflow-hidden">
+                          {/* Collapsed details are hidden from assistive tech and the tab order, not only by size. */}
+                          <div id={detailsId} className="overflow-hidden" inert={!isJobExpanded} aria-hidden={!isJobExpanded}>
                             <p className="max-w-[50ch] pl-14 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
                               <span className="mr-1 text-zinc-300 dark:text-zinc-600">↳</span>
                               {job.description}
                               {storyHref && (
                                 <>
                                   {" "}
+                                  {/* The details clip overflow, so focus shows as a fill and a darker underline, not an outline. */}
                                   <Link
                                     href={storyHref}
-                                    onClick={(event) => event.stopPropagation()}
-                                    className="whitespace-nowrap font-medium text-zinc-900 underline decoration-zinc-300 decoration-1 [text-underline-position:from-font] transition-colors hover:decoration-zinc-900 dark:text-zinc-100 dark:decoration-zinc-600 dark:hover:decoration-zinc-100"
+                                    className="whitespace-nowrap rounded-sm font-medium text-zinc-900 underline decoration-zinc-300 decoration-1 [text-underline-position:from-font] transition-colors hover:decoration-zinc-900 focus-visible:bg-zinc-100 focus-visible:decoration-zinc-900 focus-visible:outline-none dark:text-zinc-100 dark:decoration-zinc-600 dark:hover:decoration-zinc-100 dark:focus-visible:bg-zinc-800 dark:focus-visible:decoration-zinc-100"
                                   >
                                     Read the full story →
                                   </Link>
