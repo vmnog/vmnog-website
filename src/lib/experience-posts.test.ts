@@ -5,6 +5,7 @@ import {
   experienceContentDir,
   experiencePostMetadata,
   experienceSlug,
+  experienceStoryHrefs,
   getExperiencePost,
   listExperiencePostSlugs,
 } from "@/lib/experience-posts";
@@ -137,6 +138,16 @@ describe("listExperiencePostSlugs", () => {
 
   it("lists nothing when the content folder does not exist yet", () => {
     expect(listExperiencePostSlugs(path.join(fixtures, "does-not-exist"))).toEqual([]);
+  });
+});
+
+describe("experienceStoryHrefs", () => {
+  it("links each homepage row that has a post to its page, by company name", () => {
+    expect(experienceStoryHrefs(path.join(fixtures, "valid"))).toEqual({ DocHelp: "/experience/dochelp" });
+  });
+
+  it("links no row when no post is written yet", () => {
+    expect(experienceStoryHrefs(path.join(fixtures, "does-not-exist"))).toEqual({});
   });
 });
 
