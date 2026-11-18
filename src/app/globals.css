@@ -26,3 +26,39 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+/* The body of an experience post (docs/adr/0006, 0007, 0008), rendered from markdown. Values from
+   the board "Experience post / long story". */
+.experience-post-body {
+  @apply flex flex-col gap-5 text-base leading-relaxed text-zinc-600 dark:text-zinc-400;
+}
+
+.experience-post-body h2,
+.experience-post-body h3 {
+  @apply text-lg font-medium tracking-[-0.01em] text-zinc-900 dark:text-zinc-100;
+}
+
+.experience-post-body > :is(h2, h3):not(:first-child) {
+  @apply mt-7;
+}
+
+.experience-post-body strong {
+  @apply font-medium text-zinc-900 dark:text-zinc-100;
+}
+
+.experience-post-body a {
+  @apply font-medium text-zinc-900 underline decoration-zinc-300 decoration-1 transition-colors hover:decoration-zinc-900 dark:text-zinc-100 dark:decoration-zinc-600 dark:hover:decoration-zinc-100;
+  text-underline-position: from-font;
+}
+
+.experience-post-body ul {
+  @apply list-disc space-y-2 pl-5;
+}
+
+.experience-post-body ol {
+  @apply list-decimal space-y-2 pl-5;
+}
+
+/* An image scales down to the text column and never grows past its own width (docs/adr/0007). */
+.experience-post-body img {
+  @apply block h-auto max-w-full rounded-xl outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10;
+}

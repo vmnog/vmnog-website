@@ -109,6 +109,17 @@ function postSlugsIn(dir: string): string[] {
   return slugs;
 }
 
+// The homepage row of each role with a written post links to its page (docs/adr/0002), keyed by
+// the row's company name. A row with no post gets no link.
+export function experienceStoryHrefs(dir: string): Record<string, string> {
+  const written = listExperiencePostSlugs(dir);
+  return Object.fromEntries(
+    workExperience
+      .filter((job) => written.includes(experienceSlug(job.company)))
+      .map((job) => [job.company, `/experience/${experienceSlug(job.company)}`]),
+  );
+}
+
 // Where the real posts live (docs/adr/0007). Fixed on purpose: no setting can point a build at
 // another folder. Tests pass their fixture folder to the functions above instead.
 export function experienceContentDir(): string {
