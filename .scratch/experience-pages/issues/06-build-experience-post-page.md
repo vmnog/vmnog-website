@@ -1,7 +1,7 @@
 # Build: experience post page and row link
 
 Milestone: 1 · Next
-Status: needs-triage
+Status: In Progress
 Blocked by: 02, 03
 
 Build the post page layout (docs/adr/0006) and the "Read the full story →" link at the end of an expanded row

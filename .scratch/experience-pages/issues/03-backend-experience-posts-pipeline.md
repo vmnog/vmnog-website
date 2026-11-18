@@ -1,7 +1,7 @@
 # Backend: experience posts content pipeline and route
 
 Milestone: 1 · Next
-Status: In Progress
+Status: On Staging
 Blocked by: none
 
 Markdown files at content/experience/<slug>.md (title and summary at the top), read at build time; the static route
@@ -21,3 +21,5 @@ Size: quick. Part of experience-pages/01, whose full check was overridden to run
 ## Builder (2026-11-17)
 
 Branch `experience-pages-03-posts-pipeline`. Built: `src/lib/experience-posts.ts` (slug rule, post reader, alt-text and frontmatter checks, slug list), `src/lib/work-experience.ts` (row data moved out of the homepage), the route `src/app/experience/[slug]/page.tsx` (minimal, unstyled), vitest with 12 tests (`pnpm test`). Screenshots in `screenshots/experience-pages-03/`.
+
+Merged into staging as #7 (7ba76b6), 2026-11-17, after Victor OK'd the evidence.

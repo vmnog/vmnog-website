@@ -64,7 +64,7 @@ Every command runs from this folder: .
 
 - Check: pnpm lint && pnpm exec tsc --noEmit && pnpm build
 - Lint: inside Check
-- More tests: none
+- More tests: pnpm test
 - Database tests: none
 - Smoke run: none
 - Prompt check: none
