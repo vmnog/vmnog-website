@@ -28,9 +28,10 @@ describe("HomePage experience rows", () => {
     expect(storyLinks(html)).toHaveLength(0);
   });
 
-  it("keeps a collapsed row's link out of the tab order", () => {
+  it("keeps a collapsed row's link in the tab order", () => {
     const html = renderToStaticMarkup(<HomePage storyHrefs={{ DocHelp: "/experience/dochelp" }} />);
 
-    expect(html).toMatch(/<div class="overflow-hidden" inert="">\s*<p[^>]*>.*?helping 500\+ real doctors/);
+    expect(html).not.toContain("inert");
+    expect(storyLinks(html)[0]).not.toContain("tabindex");
   });
 });

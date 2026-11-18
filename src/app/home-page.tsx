@@ -214,6 +214,8 @@ export function HomePage({ storyHrefs }: Props) {
                           transition: { duration: 0.3, delay: (workExperience.length - 1 - index) * 0.05 }
                         }}
                         onClick={() => setExpandedJob(isJobExpanded ? null : jobKey)}
+                        // Tabbing onto a collapsed row's story link opens the row, so the link is never focused unseen.
+                        onFocus={() => setExpandedJob(jobKey)}
                       >
                         <div className="flex flex-col">
                           <div className="flex items-center gap-4">
@@ -246,7 +248,7 @@ export function HomePage({ storyHrefs }: Props) {
                           </span>
                         </div>
                         <div className={`grid transition-all duration-200 ease-out ${isJobExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                          <div className="overflow-hidden" inert={!isJobExpanded}>
+                          <div className="overflow-hidden">
                             <p className="max-w-[50ch] pl-14 text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">
                               <span className="mr-1 text-zinc-300 dark:text-zinc-600">↳</span>
                               {job.description}

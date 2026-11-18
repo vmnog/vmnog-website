@@ -20,7 +20,7 @@ export function ExperiencePostView({ job, post }: Props) {
                 <img src={job.logo} alt={`${job.company} logo`} className="size-5 rounded-full object-cover" />
               </div>
               <span className="font-medium text-zinc-900 dark:text-zinc-100">{job.company}</span>
-              <span className="text-zinc-400 dark:text-zinc-500" aria-label={`${job.startYear} until ${job.endYear}`}>
+              <span className="text-zinc-400 dark:text-zinc-500">
                 {job.startYear} - {job.endYear}
               </span>
             </div>

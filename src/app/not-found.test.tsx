@@ -18,6 +18,6 @@ describe("NotFound", () => {
   });
 
   it("names the tab", () => {
-    expect(metadata.title).toBe("Page not found");
+    expect(metadata.title).toEqual({ absolute: "Page not found · Victor Nogueira" });
   });
 });

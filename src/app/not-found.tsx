@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 
-export const metadata: Metadata = { title: "Page not found" };
+// Same separator as the experience posts' tab titles (docs/adr/0006).
+export const metadata: Metadata = { title: { absolute: "Page not found · Victor Nogueira" } };
 
 // Every unknown URL on the site, including /experience/<unknown> (docs/adr/0006). Board "404 / unknown URL".
 export default function NotFound() {
