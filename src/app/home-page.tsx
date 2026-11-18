@@ -261,7 +261,7 @@ export function HomePage({ storyHrefs }: Props) {
                                   {/* The details clip overflow, so focus shows as a fill and a darker underline, not an outline. */}
                                   <Link
                                     href={storyHref}
-                                    className="whitespace-nowrap rounded-sm font-medium text-zinc-900 underline decoration-zinc-300 decoration-1 [text-underline-position:from-font] transition-colors hover:decoration-zinc-900 focus-visible:bg-zinc-100 focus-visible:decoration-zinc-900 focus-visible:outline-none dark:text-zinc-100 dark:decoration-zinc-600 dark:hover:decoration-zinc-100 dark:focus-visible:bg-zinc-800 dark:focus-visible:decoration-zinc-100"
+                                    className="whitespace-nowrap rounded-sm font-medium text-zinc-900 underline decoration-zinc-300 decoration-1 [text-underline-position:from-font] transition-colors hover:decoration-zinc-900 focus-visible:bg-zinc-200 focus-visible:decoration-zinc-900 focus-visible:decoration-2 focus-visible:outline-none dark:text-zinc-100 dark:decoration-zinc-600 dark:hover:decoration-zinc-100 dark:focus-visible:bg-zinc-700 dark:focus-visible:decoration-zinc-100"
                                   >
                                     Read the full story →
                                   </Link>
