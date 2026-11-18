@@ -1,7 +1,7 @@
 # Build: experience post page and row link
 
 Milestone: 1 · Next
-Status: In Progress
+Status: On Staging
 Blocked by: 02, 03
 
 Build the post page layout (docs/adr/0006) and the "Read the full story →" link at the end of an expanded row
@@ -18,3 +18,5 @@ Size: quick. Part of experience-pages/01, whose full check was overridden to run
 ## Builder (2026-11-17)
 
 Branch `experience-pages-06-post-page`. Built the Q1 B post page (`ExperiencePostView`), the Q2 A "Read the full story →" row link, the Q3 B site-wide `not-found` page, a shared `SiteFooter`, and the ADR 0006 update. Evidence in `screenshots/experience-pages-06/`.
+
+Merged into staging as #9 (bac4245), 2026-11-17, after Victor OK'd the evidence.
